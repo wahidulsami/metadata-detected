@@ -2,26 +2,26 @@
 
 import { useCallback, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FileImage, Upload, X } from "lucide-react";
+import { ArrowDown, ImagePlus, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ACCEPTED_MIME_LABEL } from "@/lib/constants";
 
 type DropZoneProps = {
-  onFileSelect: (file: File) => void;
+  onFilesSelect: (files: File[]) => void;
   disabled?: boolean;
   error?: string | null;
 };
 
-export function DropZone({ onFileSelect, disabled, error }: DropZoneProps) {
+export function DropZone({ onFilesSelect, disabled, error }: DropZoneProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
 
   const handleFiles = useCallback(
     (files: FileList | null) => {
-      const file = files?.[0];
-      if (file) onFileSelect(file);
+      if (!files?.length) return;
+      onFilesSelect(Array.from(files));
     },
-    [onFileSelect]
+    [onFilesSelect]
   );
 
   return (
@@ -46,45 +46,43 @@ export function DropZone({ onFileSelect, disabled, error }: DropZoneProps) {
           handleFiles(e.dataTransfer.files);
         }}
         onClick={() => !disabled && inputRef.current?.click()}
-        whileHover={disabled ? undefined : { scale: 1.005 }}
-        whileTap={disabled ? undefined : { scale: 0.995 }}
         className={cn(
-          "group relative cursor-pointer overflow-hidden rounded-2xl border border-dashed transition-colors",
-          "border-zinc-800 bg-zinc-900/20 backdrop-blur-md",
-          isDragging && "border-zinc-500 bg-zinc-800/40",
+          "group relative cursor-pointer overflow-hidden border border-stone-700/60 bg-stone-950/50 transition-all duration-300",
+          "panel-cut min-h-[280px]",
+          isDragging && "border-orange-400/70 bg-orange-500/5 shadow-[0_0_60px_-12px_rgb(249_115_22/0.35)]",
           disabled && "pointer-events-none opacity-60",
-          !disabled && "hover:border-zinc-600 hover:bg-zinc-900/40"
+          !disabled && "hover:border-stone-500/80"
         )}
       >
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-zinc-500/5 via-transparent to-zinc-400/5 opacity-0 transition-opacity group-hover:opacity-100" />
+        <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-orange-500 via-amber-400/50 to-transparent opacity-80" />
 
-        <div className="relative flex flex-col items-center gap-4 px-6 py-14 sm:py-16">
-          <motion.div
-            animate={
-              isDragging
-                ? { y: -4, scale: 1.05, rotate: -2 }
-                : { y: 0, scale: 1, rotate: 0 }
-            }
-            transition={{ type: "spring", stiffness: 380, damping: 22 }}
-            className={cn(
-              "flex size-14 items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-950/60 shadow-inner",
-              isDragging && "border-zinc-600 bg-zinc-800/80"
-            )}
-          >
-            {isDragging ? (
-              <Upload className="size-6 text-zinc-200" />
-            ) : (
-              <FileImage className="size-6 text-zinc-400" />
-            )}
-          </motion.div>
+        <div className="relative flex h-full flex-col justify-between gap-8 p-8 sm:flex-row sm:items-center sm:p-10">
+          <div className="flex flex-col gap-4">
+            <motion.div
+              animate={isDragging ? { y: -6 } : { y: 0 }}
+              className="inline-flex size-16 items-center justify-center border border-stone-700 bg-stone-900/80"
+            >
+              <ImagePlus className={cn("size-7", isDragging ? "text-orange-400" : "text-stone-400")} />
+            </motion.div>
+            <div>
+              <p className="font-display text-2xl font-bold text-stone-100 sm:text-3xl">
+                {isDragging ? "Release the roll" : "Load your frames"}
+              </p>
+              <p className="mt-2 max-w-sm text-sm text-stone-500">
+                Drop one or many images · {ACCEPTED_MIME_LABEL} · processed entirely in memory
+              </p>
+            </div>
+          </div>
 
-          <div className="text-center">
-            <p className="text-base font-medium text-zinc-100">
-              {isDragging ? "Drop to analyze" : "Drag & drop an image"}
-            </p>
-            <p className="mt-1 text-sm text-zinc-500">
-              or click to browse · {ACCEPTED_MIME_LABEL}
-            </p>
+          <div className="flex flex-col items-start gap-3 sm:items-end">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-stone-600">
+              Tap or browse
+            </span>
+            <div className="inline-flex items-center gap-2 border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm font-medium text-orange-200">
+              Import
+              <ArrowDown className="size-4" />
+            </div>
+            <p className="text-[10px] text-stone-600">⌘V paste from clipboard soon · Esc clears</p>
           </div>
         </div>
 
@@ -92,6 +90,7 @@ export function DropZone({ onFileSelect, disabled, error }: DropZoneProps) {
           ref={inputRef}
           type="file"
           accept="image/jpeg,image/png,image/webp,image/tiff"
+          multiple
           className="hidden"
           disabled={disabled}
           onChange={(e) => handleFiles(e.target.files)}

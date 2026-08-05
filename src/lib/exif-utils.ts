@@ -5,6 +5,12 @@ import type {
   OverviewStat,
   ParsedImageExif,
 } from "@/types/exif";
+import { analyzePrivacy } from "@/lib/privacy-score";
+import {
+  computeFileSha256,
+  computeLuminanceHistogram,
+  extractDominantColors,
+} from "@/lib/image-analysis";
 
 type TagLike = {
   description?: string;
@@ -135,12 +141,61 @@ function buildRawJson(tags: Tags): Record<string, { description: string; value: 
   return out;
 }
 
+function aspectLabel(width: number, height: number): string {
+  const ratio = width / height;
+  const targets = [
+    { label: "16:9", value: 16 / 9 },
+    { label: "4:3", value: 4 / 3 },
+    { label: "3:2", value: 3 / 2 },
+    { label: "1:1", value: 1 },
+    { label: "9:16", value: 9 / 16 },
+  ];
+  let best = targets[0];
+  let diff = Math.abs(ratio - best.value);
+  for (const t of targets) {
+    const d = Math.abs(ratio - t.value);
+    if (d < diff) {
+      diff = d;
+      best = t;
+    }
+  }
+  return diff < 0.08 ? best.label : `${ratio.toFixed(2)}:1`;
+}
+
+async function enrichParsed(
+  file: File,
+  previewUrl: string,
+  base: Omit<
+    ParsedImageExif,
+    "id" | "privacy" | "dominantColors" | "histogram" | "fileHash" | "aspectLabel"
+  >,
+  flat: Tags
+): Promise<ParsedImageExif> {
+  const [dominantColors, histogram, fileHash] = await Promise.all([
+    extractDominantColors(previewUrl).catch(() => [] as string[]),
+    computeLuminanceHistogram(previewUrl).catch(() => Array(32).fill(0)),
+    computeFileSha256(file).catch(() => ""),
+  ]);
+
+  return {
+    ...base,
+    id: crypto.randomUUID(),
+    privacy: analyzePrivacy(flat, base.gps),
+    dominantColors,
+    histogram,
+    fileHash,
+    aspectLabel: aspectLabel(base.width, base.height),
+  };
+}
+
 function countMeaningfulExif(tags: Tags): boolean {
   const keys = Object.keys(tags).filter(
     (k) => k !== "Thumbnail" && k !== "Images" && k !== "FileType"
   );
   return keys.length > 0;
 }
+
+const EMPTY_TAGS = {} as Tags;
 
 export async function loadImageDimensions(
   previewUrl: string
@@ -169,37 +224,48 @@ export async function parseImageExif(
     expanded = ExifReader.load(buffer, { expanded: true });
   } catch {
     const { width, height } = await loadImageDimensions(previewUrl);
-    return {
+    return enrichParsed(
+      file,
+      previewUrl,
+      {
+        fileName: file.name,
+        fileSize: file.size,
+        mimeType: file.type,
+        previewUrl,
+        width,
+        height,
+        hasExif: false,
+        overview: buildOverview(EMPTY_TAGS, width, height),
+        gps: null,
+        tableRows: [],
+        rawJson: {},
+      },
+      EMPTY_TAGS
+    );
+  }
+
+  const { width, height } = await loadImageDimensions(previewUrl);
+  const hasExif = countMeaningfulExif(flat);
+  const gps = extractGps(expanded);
+
+  return enrichParsed(
+    file,
+    previewUrl,
+    {
       fileName: file.name,
       fileSize: file.size,
       mimeType: file.type,
       previewUrl,
       width,
       height,
-      hasExif: false,
-      overview: buildOverview({} as Tags, width, height),
-      gps: null,
-      tableRows: [],
-      rawJson: {},
-    };
-  }
-
-  const { width, height } = await loadImageDimensions(previewUrl);
-  const hasExif = countMeaningfulExif(flat);
-
-  return {
-    fileName: file.name,
-    fileSize: file.size,
-    mimeType: file.type,
-    previewUrl,
-    width,
-    height,
-    hasExif,
-    overview: buildOverview(flat, width, height),
-    gps: extractGps(expanded),
-    tableRows: flattenTags(flat),
-    rawJson: buildRawJson(flat),
-  };
+      hasExif,
+      overview: buildOverview(flat, width, height),
+      gps,
+      tableRows: flattenTags(flat),
+      rawJson: buildRawJson(flat),
+    },
+    flat
+  );
 }
 
 export function formatFileSize(bytes: number): string {

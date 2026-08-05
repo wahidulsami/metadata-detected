@@ -17,7 +17,21 @@ export type ExifTableRow = {
   category: string;
 };
 
+export type PrivacyFlag = {
+  id: string;
+  label: string;
+  severity: "high" | "medium" | "low";
+  detail: string;
+};
+
+export type PrivacyReport = {
+  score: number;
+  grade: "A" | "B" | "C" | "D" | "F";
+  flags: PrivacyFlag[];
+};
+
 export type ParsedImageExif = {
+  id: string;
   fileName: string;
   fileSize: number;
   mimeType: string;
@@ -29,4 +43,9 @@ export type ParsedImageExif = {
   gps: GpsCoordinates | null;
   tableRows: ExifTableRow[];
   rawJson: Record<string, { description: string; value: unknown }>;
+  privacy: PrivacyReport;
+  dominantColors: string[];
+  histogram: number[];
+  fileHash: string;
+  aspectLabel: string;
 };

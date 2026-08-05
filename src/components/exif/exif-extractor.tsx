@@ -100,7 +100,7 @@ export function ExifExtractorApp() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35 }}
             >
-              <DropZone onFileSelect={(f) => void handleFile(f)} disabled={loading} error={error} />
+              <DropZone onFilesSelect={(files) => void handleFile(files[0])} disabled={loading} error={error} />
             </motion.div>
           )}
 
