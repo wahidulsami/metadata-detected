@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local editor / agent tooling — do not push to GitHub
+.claude/
+.codex/
+.cursor/
+.impeccable/
+.agent/
+.agents/
+.gemini/
+.kiro/
+.opencode/
+.vscode/
+.idea/
+*.swp

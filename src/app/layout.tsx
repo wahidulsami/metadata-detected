@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Syne } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
 
@@ -14,16 +13,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const syne = Syne({
-  variable: "--font-syne",
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-});
-
 export const metadata: Metadata = {
-  title: "MetaDate · EXIF Darkroom",
+  title: "MetaDate — EXIF, privately",
   description:
-    "Creative client-side EXIF lab — privacy scoring, color DNA, batch inspect, strip & export.",
+    "Inspect camera settings, GPS, and privacy tags in your browser. Strip metadata before you share.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#09090b",
 };
 
 export default function RootLayout({
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${syne.variable} film-grain min-h-screen antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-dvh bg-background antialiased`}
       >
         <TooltipProvider>{children}</TooltipProvider>
       </body>
