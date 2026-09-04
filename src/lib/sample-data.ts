@@ -22,7 +22,7 @@ function createSampleSvgUrl(): string {
   <circle cx="900" cy="520" r="140" fill="url(#sun)"/>
   <path d="M0 620 L300 480 L550 580 L800 420 L1050 560 L1200 490 L1200 800 L0 800 Z" fill="#09090b" opacity="0.95"/>
   <path d="M0 680 L250 590 L600 660 L850 540 L1100 640 L1200 600 L1200 800 L0 800 Z" fill="#040405"/>
-  <text x="60" y="100" fill="#f97316" font-family="monospace" font-size="22" letter-spacing="4">METADATA-DETECTED // SAMPLE PHOTO DEMO</text>
+  <text x="60" y="100" fill="#f97316" font-family="monospace" font-size="22" letter-spacing="4">EXIFGUARD // SAMPLE PHOTO DEMO</text>
   <text x="60" y="140" fill="#cbd5e1" font-family="sans-serif" font-size="16" opacity="0.8">SONY ILCE-7RM5 · FE 24-70mm F2.8 GM II · 50mm · f/2.8 · 1/250s · ISO 100</text>
 </svg>`;
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;

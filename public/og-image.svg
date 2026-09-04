@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#09090b" />
+      <stop offset="50%" stop-color="#111114" />
+      <stop offset="100%" stop-color="#18181b" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f97316" />
+      <stop offset="100%" stop-color="#fb923c" />
+    </linearGradient>
+    <linearGradient id="badgeGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.05" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="30" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <!-- Subtle grid pattern -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="630" />
+    <line x1="200" y1="0" x2="200" y2="630" />
+    <line x1="300" y1="0" x2="300" y2="630" />
+    <line x1="400" y1="0" x2="400" y2="630" />
+    <line x1="500" y1="0" x2="500" y2="630" />
+    <line x1="600" y1="0" x2="600" y2="630" />
+    <line x1="700" y1="0" x2="700" y2="630" />
+    <line x1="800" y1="0" x2="800" y2="630" />
+    <line x1="900" y1="0" x2="900" y2="630" />
+    <line x1="1000" y1="0" x2="1000" y2="630" />
+    <line x1="1100" y1="0" x2="1100" y2="630" />
+    <line x1="0" y1="100" x2="1200" y2="100" />
+    <line x1="0" y1="200" x2="1200" y2="200" />
+    <line x1="0" y1="300" x2="1200" y2="300" />
+    <line x1="0" y1="400" x2="1200" y2="400" />
+    <line x1="0" y1="500" x2="1200" y2="500" />
+  </g>
+
+  <!-- Decorative Orange Glow -->
+  <circle cx="1050" cy="180" r="220" fill="#f97316" fill-opacity="0.08" filter="url(#glow)" />
+  <circle cx="150" cy="480" r="180" fill="#22c55e" fill-opacity="0.05" filter="url(#glow)" />
+
+  <!-- Container Box -->
+  <g transform="translate(100, 90)">
+    <!-- Security / Privacy Pill -->
+    <rect width="280" height="38" rx="19" fill="url(#badgeGlow)" stroke="#22c55e" stroke-opacity="0.4" stroke-width="1.5" />
+    <circle cx="22" cy="19" r="5" fill="#22c55e" />
+    <text x="36" y="24" fill="#4ade80" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" letter-spacing="0.05em">100% IN-BROWSER · ZERO UPLOADS</text>
+
+    <!-- Main Title -->
+    <g transform="translate(0, 100)">
+      <text fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="900" letter-spacing="-0.02em">
+        MetaDate<tspan fill="#f97316">.Studio</tspan>
+      </text>
+      <text y="58" fill="#a1a1aa" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="500">
+        Free In-Browser EXIF Viewer &amp; Metadata Privacy Stripper
+      </text>
+    </g>
+
+    <!-- Description Paragraph -->
+    <text x="0" y="225" fill="#71717a" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="400">
+      Inspect camera optics, shutter speed, ISO, and GPS coordinates right on your device.
+    </text>
+    <text x="0" y="255" fill="#71717a" font-family="system-ui, -apple-system, sans-serif" font-size="19" font-weight="400">
+      Sanitize sensitive metadata tags before sharing photos online. Private, open-source &amp; fast.
+    </text>
+
+    <!-- Feature Cards / Badges -->
+    <g transform="translate(0, 310)">
+      <!-- Feature 1 -->
+      <rect width="230" height="85" rx="12" fill="#18181b" stroke="#27272a" stroke-width="1.5" />
+      <circle cx="28" cy="28" r="12" fill="#f97316" fill-opacity="0.15" />
+      <text x="28" y="33" text-anchor="middle" fill="#f97316" font-size="13">📸</text>
+      <text x="48" y="33" fill="#f4f4f5" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700">Deep EXIF / XMP</text>
+      <text x="16" y="58" fill="#71717a" font-family="system-ui, -apple-system, sans-serif" font-size="13">Aperture, ISO, lens, gear</text>
+
+      <!-- Feature 2 -->
+      <g transform="translate(250, 0)">
+        <rect width="230" height="85" rx="12" fill="#18181b" stroke="#27272a" stroke-width="1.5" />
+        <circle cx="28" cy="28" r="12" fill="#3b82f6" fill-opacity="0.15" />
+        <text x="28" y="33" text-anchor="middle" fill="#3b82f6" font-size="13">📍</text>
+        <text x="48" y="33" fill="#f4f4f5" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700">GPS &amp; Maps</text>
+        <text x="16" y="58" fill="#71717a" font-family="system-ui, -apple-system, sans-serif" font-size="13">Coordinates &amp; map links</text>
+      </g>
+
+      <!-- Feature 3 -->
+      <g transform="translate(500, 0)">
+        <rect width="230" height="85" rx="12" fill="#18181b" stroke="#27272a" stroke-width="1.5" />
+        <circle cx="28" cy="28" r="12" fill="#22c55e" fill-opacity="0.15" />
+        <text x="28" y="33" text-anchor="middle" fill="#22c55e" font-size="13">🛡️</text>
+        <text x="48" y="33" fill="#f4f4f5" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700">Privacy Audit</text>
+        <text x="16" y="58" fill="#71717a" font-family="system-ui, -apple-system, sans-serif" font-size="13">Live risk meter (0–100)</text>
+      </g>
+
+      <!-- Feature 4 -->
+      <g transform="translate(750, 0)">
+        <rect width="230" height="85" rx="12" fill="#18181b" stroke="#27272a" stroke-width="1.5" />
+        <circle cx="28" cy="28" r="12" fill="#a855f7" fill-opacity="0.15" />
+        <text x="28" y="33" text-anchor="middle" fill="#a855f7" font-size="13">🧹</text>
+        <text x="48" y="33" fill="#f4f4f5" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="700">1-Click Stripper</text>
+        <text x="16" y="58" fill="#71717a" font-family="system-ui, -apple-system, sans-serif" font-size="13">Scrub &amp; export clean</text>
+      </g>
+    </g>
+  </g>
+</svg>

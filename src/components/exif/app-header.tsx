@@ -68,13 +68,13 @@ export function AppHeader({
         {/* Brand / Title Area */}
         <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
           <div className="relative flex size-8 shrink-0 items-center justify-center rounded-lg border border-orange-500/40 bg-orange-500/10 shadow-[0_0_12px_rgba(249,115,22,0.15)]">
-            <Image src="/logo.svg" alt="metadata-detected logo" width={24} height={24} className="size-6" />
+            <Image src="/logo.svg" alt="ExifGuard logo" width={24} height={24} className="size-6" />
             <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-emerald-400 ring-2 ring-zinc-950" />
           </div>
           <div className="flex min-w-0 flex-col">
             <div className="flex items-center gap-1.5">
               <span className="font-mono text-xs font-bold tracking-wider text-zinc-100 uppercase">
-                metadata<span className="text-orange-400">-detected</span>
+                Exif<span className="text-orange-400">Guard</span>
               </span>
               <span className="hidden rounded bg-zinc-800 px-1 py-px font-mono text-[10px] font-semibold text-zinc-400 sm:inline">
                 v2.4

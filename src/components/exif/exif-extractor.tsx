@@ -14,6 +14,7 @@ import { validateImageFile } from "@/lib/validate-image";
 import { getSampleParsedData } from "@/lib/sample-data";
 import { cn } from "@/lib/utils";
 import type { ParsedImageExif } from "@/types/exif";
+import { SeoContent } from "@/components/exif/seo-content";
 
 export function ExifExtractorApp() {
   const [items, setItems] = useState<ParsedImageExif[]>([]);
@@ -296,6 +297,8 @@ export function ExifExtractorApp() {
             {stripError}
           </p>
         )}
+
+        <SeoContent />
       </main>
 
       <input

@@ -1,5 +1,5 @@
 {
-  "name": "metadata-detected",
+  "name": "exif-guard",
   "version": "0.1.0",
   "description": "Zero-knowledge in-browser EXIF metadata inspector and privacy stripper",
   "license": "MIT",

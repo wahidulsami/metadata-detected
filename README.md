@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📷 metadata-detected
+# 📷 ExifGuard
 
 **Inspect camera settings, GPS, and privacy tags in your browser. Strip metadata before you share.**
 
@@ -8,7 +8,7 @@
 [![Next.js](https://img.shields.io/badge/Next.js-15.5-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
-[![Privacy: 100% Client-Side](https://img.shields.io/badge/Privacy-100%25%20Client--Side-green?style=flat-square&logo=shield)](https://github.com/wahidulsami/metadata-detected)
+[![Privacy: 100% Client-Side](https://img.shields.io/badge/Privacy-100%25%20Client--Side-green?style=flat-square&logo=shield)](https://github.com/wahidulsami/exif-guard)
 
 <p align="center">
   <a href="#features">Features</a> •
@@ -27,9 +27,9 @@
 
 Every photo you take carries hidden digital footprints: precise GPS coordinates, camera serial numbers, creator identities, software history, and exact timestamps.
 
-Most online metadata viewers upload your photos to remote servers to parse them. **metadata-detected is completely different.**
+Most online metadata viewers upload your photos to remote servers to parse them. **ExifGuard is completely different.**
 
-**metadata-detected** is a modern, open-source, client-side EXIF metadata inspector and privacy sanitization tool. All parsing, rendering, and metadata stripping is performed directly **inside your browser's memory** via Web APIs. Your images are never uploaded, logged, or sent over any network.
+**ExifGuard** is a modern, open-source, client-side EXIF metadata inspector and privacy sanitization tool. All parsing, rendering, and metadata stripping is performed directly **inside your browser's memory** via Web APIs. Your images are never uploaded, logged, or sent over any network.
 
 ---
 
@@ -41,7 +41,7 @@ Most online metadata viewers upload your photos to remote servers to parse them.
   - Exposure & Settings: Aperture, shutter speed, ISO sensitivity, exposure mode, metering, white balance, flash status.
   - Color & Technical: Color space, image dimensions, megapixel count, bit depth, compression, orientation.
 - **GPS & Geolocation Inspector**: Interactive coordinates readout with direct links to OpenStreetMap or Google Maps.
-- **1-Click Metadata Stripper**: Strip all EXIF, GPS, IPTC, and XMP tags. Download clean, privacy-safe images.
+- **1-Click Metadata Stripper**: Strip all EXIF, GPS, IPTC, and XMP tags. Download clean, privacy-safe images. (Note: JPEG output re-compresses at 0.92 quality)
 - **Side-by-Side Comparison**: Compare metadata fields across two images.
 - **Multi-Image Filmstrip**: Drag-and-drop single files or entire batches.
 - **Export Options**: Export to JSON or CSV. One-click copy formatted EXIF summary.
@@ -81,7 +81,7 @@ Most online metadata viewers upload your photos to remote servers to parse them.
 | **JPEG** | `.jpg`, `.jpeg` | ✅ | ✅ |
 | **PNG** | `.png` | ✅ | ✅ |
 | **WebP** | `.webp` | ✅ | ✅ |
-| **TIFF** | `.tiff`, `.tif` | ✅ | ✅ |
+| **TIFF** | `.tiff`, `.tif` | ✅ | ❌ (browser canvas limitation) |
 
 ---
 
@@ -108,8 +108,8 @@ Most online metadata viewers upload your photos to remote servers to parse them.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/wahidulsami/metadata-detected.git
-   cd metadata-detected
+   git clone https://github.com/wahidulsami/exif-guard.git
+   cd exif-guard
    ```
 
 2. Install dependencies:
@@ -139,12 +139,12 @@ Most online metadata viewers upload your photos to remote servers to parse them.
 
 ## Deployment
 
-**metadata-detected** exports to a pure static bundle (`output: "export"`), deployable to any static host.
+**ExifGuard** exports to a pure static bundle (`output: "export"`), deployable to any static host.
 
 ### Cloudflare Pages
-Configured via `wrangler.jsonc`:
 - Build Command: `npm run build`
 - Output Directory: `out`
+- Node.js Version: `20+` or `24+`
 
 ### Vercel
 Import the repository. Next.js is auto-detected.

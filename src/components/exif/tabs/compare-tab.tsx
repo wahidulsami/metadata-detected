@@ -65,7 +65,7 @@ export function CompareTab({ items, currentId }: CompareTabProps) {
   const copyDiffSummary = async () => {
     if (!imageA || !imageB) return;
     const lines = [
-      `METADATA-DETECTED DIFF REPORT`,
+      `EXIFGUARD DIFF REPORT`,
       `===================`,
       `File A: ${imageA.fileName} (${imageA.width}x${imageA.height}, ${formatFileSize(imageA.fileSize)})`,
       `File B: ${imageB.fileName} (${imageB.width}x${imageB.height}, ${formatFileSize(imageB.fileSize)})`,
