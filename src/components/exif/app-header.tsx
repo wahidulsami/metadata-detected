@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Camera,
   Check,
   Lock,
   MoreHorizontal,
@@ -20,6 +19,7 @@ import { formatFileSize } from "@/lib/exif-utils";
 import { buildShareSummary } from "@/lib/export-metadata";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 
 type AppHeaderProps = {
   activeItem?: ParsedImageExif | null;
@@ -67,14 +67,14 @@ export function AppHeader({
       <div className="app-gutter mx-auto flex h-14 max-w-7xl items-center justify-between gap-2">
         {/* Brand / Title Area */}
         <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
-          <div className="relative flex size-8 shrink-0 items-center justify-center rounded-lg border border-orange-500/40 bg-orange-500/10 text-orange-400 shadow-[0_0_12px_rgba(249,115,22,0.15)]">
-            <Camera className="size-4" />
+          <div className="relative flex size-8 shrink-0 items-center justify-center rounded-lg border border-orange-500/40 bg-orange-500/10 shadow-[0_0_12px_rgba(249,115,22,0.15)]">
+            <Image src="/logo.svg" alt="metadata-detected logo" width={24} height={24} className="size-6" />
             <span className="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-emerald-400 ring-2 ring-zinc-950" />
           </div>
           <div className="flex min-w-0 flex-col">
             <div className="flex items-center gap-1.5">
               <span className="font-mono text-xs font-bold tracking-wider text-zinc-100 uppercase">
-                METADATE<span className="text-orange-400">.STUDIO</span>
+                metadata<span className="text-orange-400">-detected</span>
               </span>
               <span className="hidden rounded bg-zinc-800 px-1 py-px font-mono text-[10px] font-semibold text-zinc-400 sm:inline">
                 v2.4

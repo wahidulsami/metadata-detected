@@ -1,7 +1,24 @@
 {
   "name": "metadata-detected",
   "version": "0.1.0",
-  "private": true,
+  "description": "Zero-knowledge in-browser EXIF metadata inspector and privacy stripper",
+  "license": "MIT",
+  "author": "Wahidul Islam Sami <wahidulislamsami5@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wahidulsami/metadate-detcted.git"
+  },
+  "keywords": [
+    "exif",
+    "metadata",
+    "privacy",
+    "security",
+    "image-inspector",
+    "gps",
+    "exif-stripper",
+    "nextjs",
+    "react"
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
