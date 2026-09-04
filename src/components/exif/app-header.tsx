@@ -76,9 +76,7 @@ export function AppHeader({
               <span className="font-mono text-xs font-bold tracking-wider text-zinc-100 uppercase">
                 Exif<span className="text-orange-400">Guard</span>
               </span>
-              <span className="hidden rounded bg-zinc-800 px-1 py-px font-mono text-[10px] font-semibold text-zinc-400 sm:inline">
-                v2.4
-              </span>
+    
             </div>
             <span className="hidden font-mono text-[10px] text-zinc-500 sm:inline-block">
               Client-side EXIF &amp; privacy
